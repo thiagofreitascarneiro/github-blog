@@ -3,6 +3,7 @@ import { HomePage } from './pages/Home'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/defaults'
 
+
 function App() {
 
 

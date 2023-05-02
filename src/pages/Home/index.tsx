@@ -1,45 +1,67 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import { ContainerHome, GithubProfile, PhotoProfile, Profile, WraperGithubProfile, WraperProfile } from "./styles";
-import avatar  from "../../../public/avatar.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faBuilding } from '@fortawesome/free-solid-svg-icons';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { Profile } from "../../components/Profile";
+import { ContainerHome, WraperIssue } from "./styles";
+import { GithubUserData, getUser } from "../../lib/axios";
+import { IssueUser } from "../../components/Issue";
+import axios from 'axios';
 
+
+interface IssueData {
+    id: number;
+    title: string;
+    body: string;
+    user: {
+      login: string;
+    };
+  }
 
 export function HomePage() {
+
+    const [userData, setUserData] = useState<GithubUserData | null>(null);
+    const [issues, setIssues] = useState<IssueData[]>([]);
+    const userName = 'thiagofreitascarneiro';
+    const userIssuesGithub = 'github-blog';
+
+    async function fetchIssues() {
+        try {
+            const response = await axios.get
+            (`https://api.github.com/repos/${userName}/${userIssuesGithub}/issues`);
+            setIssues(response.data);
+            console.log(response.data)
+          } catch (error) {
+            console.error(error);
+          }
+    }
+    
+    useEffect(() => {
+        getUser(userName).then(data => {
+          setUserData(data);
+          console.log(data);
+        });
+        fetchIssues();
+      }, [userName, userIssuesGithub]);
+    
+      if (!userData) {
+        return <div>Loading...</div>;
+      }
+
     return (
         <ContainerHome>
             <Header />
-            <WraperProfile>
-                <PhotoProfile>
-                    <img src={avatar} alt="" />
-                </PhotoProfile>
-                <Profile>
-                    <h2>Cameron Williamson</h2>
-                    <p>
-                        Tristique volutpat pulvinar vel massa, pellentesque egestas. 
-                        Eu viverra massa quam dignissim aenean malesuada 
-                        suscipit. Nunc, volutpat pulvinar vel mass.
-                    </p>
-                    <WraperGithubProfile>
-                        <GithubProfile>
-                            <FontAwesomeIcon icon={faGithub} color="#3A536B" />
-                            <p>cameronwll</p>
-                        </GithubProfile>
-                        
-                        <GithubProfile>
-                            <FontAwesomeIcon icon={faBuilding} color="#3A536B"/>
-                            <p>Rocketseat</p>
-                        </GithubProfile>
-                        <GithubProfile>
-                            <FontAwesomeIcon icon={faUserFriends} color="#3A536B" />
-                            <p>32 seguidores</p>
-                        </GithubProfile> 
-                    </WraperGithubProfile>
-                </Profile>
-            </WraperProfile>
-          
+            <Profile
+                content={userData}
+             />
+            <WraperIssue>
+                {issues.map(issue => (
+                    <IssueUser
+                        key={issue.id}
+                        content={issue}
+                    />
+                ))}
+            </WraperIssue>
+            
+
         </ContainerHome>
     )
 }

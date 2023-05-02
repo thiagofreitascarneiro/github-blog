@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerHeader = styled.div`
-    background: radial-gradient(circle, rgba(11,27,43,1) 0%, rgba(20,88,156,1) 100%);
+    background: radial-gradient(circle, rgba(11,27,43,1) 0%, rgbA(1, 31, 60) 100%);
     height: 296px;
     width: 100%;
    
