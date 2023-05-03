@@ -10,7 +10,7 @@ export interface GithubUserData {
     login: string;
   }
 
-  export const authToken = "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";
+  export const authToken = "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";
   export const headers = {
   Authorization: `token ${authToken}`,
   };

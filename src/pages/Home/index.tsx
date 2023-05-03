@@ -6,7 +6,7 @@ import { GithubUserData, getUser } from "../../lib/axios";
 import { IssueUser } from "../../components/Issue";
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-
+import { authToken } from '../../lib/axios'
 
 
 export interface IssueData {
@@ -25,7 +25,7 @@ interface FormValues {
 
 export function HomePage() {
 
-    const authToken = "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";
+    
     const headers = {
     Authorization: `token ${authToken}`,
     };

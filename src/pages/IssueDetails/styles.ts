@@ -97,3 +97,12 @@ export const IssuesProfile = styled.div`
         color: ${(props) => props.theme['base-subtitle']};
     }
 `
+
+export const WraperIssue = styled.div`
+    width: 800px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 32px;
+    
+`
+

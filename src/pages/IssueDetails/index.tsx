@@ -4,12 +4,15 @@ import { IssueData } from '../Home';
 import axios from 'axios';
 import { headers } from "../../lib/axios"
 import { Header } from '../../components/Header';
-import { ContainerIssueDetails, IssuesProfile, TextLink, WraperBody, WraperProfile, WraperText } from './styles';
+import { ContainerIssueDetails, IssuesProfile, TextLink, WraperBody, WraperIssue, WraperProfile, WraperText } from './styles';
 import ReactMarkdown from 'react-markdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
+
 
 export function IssueDetails() {
   const { number } = useParams<{ number: string }>();
@@ -58,12 +61,21 @@ const userIssuesGithub = 'github-blog';
             </a> 
         </WraperText>
         <h1>{issue.title}</h1>
-        <IssuesProfile>
+        <WraperIssue>
+          <IssuesProfile>
             <FontAwesomeIcon icon={faGithub} color="#3A536B" />
-            <p>cameronwll</p>
+            <p>{issue.user.login}</p>
+          </IssuesProfile>
+          <IssuesProfile>
+            <FontAwesomeIcon icon={faCalendarAlt} color="#3A536B" />
             <p>Há 1 dia</p>
-            <p>5 comentários</p>
-        </IssuesProfile>
+          </IssuesProfile> 
+          <IssuesProfile> 
+            <FontAwesomeIcon icon={faComment} color="#3A536B" />
+            <p>{issue.comments} comentários</p>
+          </IssuesProfile>
+        </WraperIssue>
+       
       </WraperProfile>
       <WraperBody>
         <p><ReactMarkdown>{issue.body}</ReactMarkdown></p>
