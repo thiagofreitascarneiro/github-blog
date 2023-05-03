@@ -17,7 +17,6 @@ export const PhotoProfile = styled.div`
     display: flex;
     width: 148px;
     height: 148px;
-    margin-left: 40px;
 
     img {
         border-radius: 8px;

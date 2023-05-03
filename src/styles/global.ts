@@ -37,6 +37,9 @@ export const GlobalStyle = createGlobalStyle<IProps>`
     body {
         background: ${(props) => props.theme['background']};
         -webkit-font-smoothing: antialiased;
+        a {
+            text-decoration: none;
+        }
     }
     
 `

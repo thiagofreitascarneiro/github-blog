@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ContainerIssue } from "./styles";
 
 interface IssueData {
@@ -6,15 +7,23 @@ interface IssueData {
 }
 
 interface PropsIssue {
-    content: IssueData; 
+    content: IssueData;
+    linkTo: string | {
+        pathname: string;
+        search?: string;
+        hash?: string;
+        state?: any;
+      }; 
 }
 
-export function IssueUser( {content}: PropsIssue ) {
+export function IssueUser( {content, linkTo}: PropsIssue ) {
 
     return (
         <ContainerIssue>
-            <h1>{content.title}</h1>
-            <p>{content.body}</p>
+            <Link to={linkTo}>
+                <h1>{content.title}</h1>
+                <p>{content.body}</p>
+            </Link>
         </ContainerIssue>
     )
 }
