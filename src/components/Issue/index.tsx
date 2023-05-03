@@ -4,6 +4,7 @@ import { ContainerIssue } from "./styles";
 interface IssueData {
   title: string;
   body: string;
+ 
 }
 
 interface PropsIssue {
