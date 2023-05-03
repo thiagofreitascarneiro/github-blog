@@ -10,6 +10,7 @@ import { authToken } from '../../lib/axios'
 
 
 export interface IssueData {
+    comments: number;
     number: string;
     id: number;
     title: string;
